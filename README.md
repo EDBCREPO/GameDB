@@ -1,6 +1,6 @@
 # GameDB
 
-GameDB is a lightweight and efficient, real-time game server backend designed for multiplayer applications. Built on the nodepp framework, it provides a solid foundation for managing player sessions, game lobbies, and server-side interactions via WebSockets.
+GameDB is a lightweight and efficient, real-time game server backend designed for multiplayer applications. Built on the nodepp framework, it provides a solid foundation for managing player sessions, game lobbies, and server-side interactions via WebSockets + Apify.
 
 ## Key Features
 
@@ -21,16 +21,17 @@ This project relies on the following libraries and frameworks:
 The API router handles the following events and routes. All communication is done over WebSockets with APIFY payloads.
 
 | Event | Path | Description |
-| CONNECT | /:tken/:pid | Establishes the initial player connection and authenticates the user with a JWT token. |
-| PING | /:tken/:pid | A simple health check to verify a player's connection and token validity. |
-| DISCONNECT | /:tken/:pid | Disconnects a player from their current game and server, cleaning up resources. |
-| SERVER | /:tken/:pid/all/:offset/:limit | Retrieves a paginated and filtered list of all available game servers. |
-| SERVER | /:tken/:pid/get/:sid | Retrieves detailed information about a specific game server. |
-| SERVER | /:tken/:pid/join/:sid | Connects a player to a specified server. |
-| SERVER | /:tken/:pid/unjoin | Disconnects a player from their current server. |
-| SERVER | /:tken/:pid/new | Creates a new game server. |
-| CHAT | /:tken/:pid | Broadcasts a chat message to all other players in the same server. |
-| GAME | /:tken/:pid | Broadcasts a Player State to all other players in the same server. |
+| --- | --- | --- |
+| CONNECT | /:tkn/:pid | Establishes the initial player connection and authenticates the user with a JWT token. |
+| PING | /:tkn/:pid | A simple health check to verify a player's connection and token validity. |
+| DISCONNECT | /:tkn/:pid | Disconnects a player from their current game and server, cleaning up resources. |
+| SERVER | /:tkn/:pid/all/:offset/:limit | Retrieves a paginated and filtered list of all available game servers. |
+| SERVER | /:tkn/:pid/get/:sid | Retrieves detailed information about a specific game server. |
+| SERVER | /:tkn/:pid/join/:sid | Connects a player to a specified server. |
+| SERVER | /:tkn/:pid/unjoin | Disconnects a player from their current server. |
+| SERVER | /:tkn/:pid/new | Creates a new game server. |
+| CHAT | /:tkn/:pid | Broadcasts a chat message to all other players in the same server. |
+| GAME | /:tkn/:pid | Broadcasts a Player State to all other players in the same server. |
 
 ## Getting Started
 To get the server up and running, ensure you have the nodepp framework and its dependencies installed. A Redis instance is also required.

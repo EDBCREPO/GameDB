@@ -41,7 +41,7 @@ void onMain() { process::env::init( ".env" );
     });
 
     auto skt = app.listen( "localhost", prt, [=]( socket_t ){
-         console::log( "-> http://localhost:8001" );
+        console::log( regex::format( "-> http://localhost:${0}", prt ) );
     });
 
     /*........................................................................*/
@@ -52,6 +52,8 @@ void onMain() { process::env::init( ".env" );
 
         auto token = controller::game::create_player( cli );
         auto pid   = regex::format( "/${0}", token );
+
+        cli.write("hello world!");
 
         apify::add( cli ).emit( "CONNECT", pid, nullptr );
 

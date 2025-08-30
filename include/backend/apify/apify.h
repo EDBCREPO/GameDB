@@ -35,10 +35,12 @@ namespace nodepp { template< class T > class apify_t { public:
     /*.......................................................................*/
 
     string_t format( string_t method, string_t path, string_t data ) const noexcept {
-        if( path.empty() ){ path = "/"; } return string::format( "%s.%s.%s.",
-            encoder::base64::atob(method).get(),
-            encoder::base64::atob(path)  .get(),
-            encoder::base64::atob(data)  .get()
+        if( path.empty() ){ path = "/"; } 
+        
+        return regex::format( "${0}.${1}.${2}.",
+            !method.empty() ? encoder::base64::atob(method) : "",
+            !path  .empty() ? encoder::base64::atob(path)   : "",
+            !data  .empty() ? encoder::base64::atob(data)   : ""
         );
     }
 
@@ -62,6 +64,7 @@ namespace nodepp { template< class T > class apify_t { public:
 
     T& operator->()      const noexcept { return obj->ctx; }
     T&   get_fd()        const noexcept { return obj->ctx; }
+    T& get_socket()      const noexcept { return get_fd(); }
     void set_fd( T& fd ) const noexcept { obj->ctx  =fd; }
     void done()          const noexcept { obj->state= 1; }
 
@@ -103,11 +106,14 @@ protected:
     /*.......................................................................*/
 
     string_t format( string_t method, string_t path, string_t data ) const noexcept {
-        if( path.empty() ){ path = "/"; } return string::format( "%s.%s.%s.",
-            encoder::base64::atob(method).get(),
-            encoder::base64::atob(path)  .get(),
-            encoder::base64::atob(data)  .get()
+        if( path.empty() ){ path = "/"; }
+        
+        return regex::format( "${0}.${1}.${2}.",
+            !method.empty() ? encoder::base64::atob(method) : "",
+            !path  .empty() ? encoder::base64::atob(path)   : "",
+            !data  .empty() ? encoder::base64::atob(data)   : ""
         );
+
     }
 
     /*.......................................................................*/

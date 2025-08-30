@@ -79,6 +79,7 @@ protected:
         auto pth = regex::replace( cli.path, path, "/" );
              pth = path::join( uri.path, pth );
              pth+= cli.search;
+             
         auto slf = type::bind( cli );
         auto hdr = cli.headers;
 
@@ -126,7 +127,7 @@ protected:
         auto n = args==nullptr ? object_t() : *args; auto self = type::bind( this );
         this->ALL( path, [=]( express_https_t& cli ){
 
-            if(!n["timeout"].has_value() ){ n["timeout"] = 0; }
+            if(!n["timeout"].has_value() ){ n["timeout"] = type::cast<uint>( 0 ); }
             if( n["timeout"].has_value() ){ cli.set_timeout(n["timeout"].as<uint>()); }
             if( n["method"] .has_value() && !regex::test( cli.method, n["method"].as<string_t>() ) )
               { return; }
@@ -148,11 +149,11 @@ public:
     nginx_https_t( const T&... args ) noexcept : express_tls_t( args... ) {}
 
     void add( string_t cmd, string_t path, object_t args ) const noexcept {
-        append( cmd, path, &args );
+         append( cmd, path, &args );
     }
 
     void add( string_t cmd, string_t path ) const noexcept {
-        append( cmd, path, nullptr );
+         append( cmd, path, nullptr );
     }
 
 };}

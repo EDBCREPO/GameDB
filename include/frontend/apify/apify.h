@@ -60,7 +60,9 @@ namespace nodepp { template< class T > class apify_t { public:
 
     /*.......................................................................*/
 
+    T& operator->()      const noexcept { return obj->ctx; }
     T&   get_fd()        const noexcept { return obj->ctx; }
+    T& get_socket()      const noexcept { return get_fd(); }
     void set_fd( T& fd ) const noexcept { obj->ctx  =fd; }
     void done()          const noexcept { obj->state= 1; }
 

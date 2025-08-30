@@ -152,10 +152,10 @@ namespace controller { apify_host_t<ws_t> apify_router(){
 
         auto n_path = regex::format( "/${0}/${1}/join/${2}",
             cli.params["tkn"], cli.params["pid"],
-            server->name
+            serv->name /*---------------------*/
         );
 
-        app.emit( cli, "SERVER", n_path, cli.message );
+        app.emit( cli.get_socket(), "SERVER", n_path, cli.message );
 
     } catch( except_t err ) {
 
